@@ -4,8 +4,8 @@ import random
 
 pygame.init()
 
-display_width = 500
-display_height = 500
+display_width = 400
+display_height = 400
 frameRate = 10
 
 display = pygame.display.set_mode((display_width, display_height))
@@ -14,7 +14,7 @@ pygame.display.set_caption("Snake")
 
 color_snake = (0, 255, 0)
 color_food = (255, 0, 0)
-color_bg = (255, 255, 255)
+color_bg = (0, 100, 100)
 
 
 snake_size = 10
@@ -22,6 +22,11 @@ snake_size = 10
 def snake(snake_size, snake_body): 
     for x in snake_body:
         pygame.draw.rect(display, color_snake, [x[0], x[1], snake_size, snake_size])
+
+def score(score):
+    display.blit(pygame.font.SysFont("Arial", 28).render(f"Score: {score}", True, (0,0,0)), [0,0])
+    
+
 
 def game():
     gameOver = False
@@ -77,6 +82,7 @@ def game():
                 gameOver = True
         
         snake(snake_size, snake_body)
+        score(snake_length - 1)
         pygame.display.update()
 
         if snake_x == food_x and snake_y == food_y:
